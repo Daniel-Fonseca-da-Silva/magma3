@@ -1,0 +1,11 @@
+<div>
+  <label for="">Nome</label>
+  <input type="text" [(ngModel)]="nota.nome" />
+  <label for="">Email</label>
+  <input type="email" [(ngModel)]="nota.email" />
+  <label for="">Preço</label>
+  <input type="number" [(ngModel)]="nota.preco" />
+  <label for="">Data</label>
+  <input type="date" [(ngModel)]="nota.data" />
+  <button (click)="save()">Salvar</button>
+</div>
