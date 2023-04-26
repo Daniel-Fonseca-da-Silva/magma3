@@ -5,10 +5,17 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
 import { NotaFiscalModule } from './nota-fiscal/nota-fiscal.module';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, AppRoutingModule, FormsModule, NotaFiscalModule],
+  imports: [
+    BrowserModule,
+    HttpClientModule,
+    AppRoutingModule,
+    FormsModule,
+    NotaFiscalModule,
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })
