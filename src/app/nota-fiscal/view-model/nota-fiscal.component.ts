@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
   templateUrl: '../view/nota-fiscal.html',
   styleUrls: ['../view/nota-fiscal.css'],
 })
-export class ViewModelComponent implements OnInit {
+export class NotaFiscalComponent implements OnInit {
   constructor(
     private notaService: NotaFiscalService,
     private readonly fb: FormBuilder,

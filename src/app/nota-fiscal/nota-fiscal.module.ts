@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ViewModelComponent } from './view-model/nota-fiscal.component';
+import { NotaFiscalComponent } from './view-model/nota-fiscal.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
-  declarations: [ViewModelComponent],
+  declarations: [NotaFiscalComponent],
   imports: [CommonModule, FormsModule, ReactiveFormsModule, HttpClientModule],
-  exports: [ViewModelComponent],
+  exports: [NotaFiscalComponent],
 })
 export class NotaFiscalModule {}
