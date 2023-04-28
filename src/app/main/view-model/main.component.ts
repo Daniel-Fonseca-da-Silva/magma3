@@ -9,4 +9,5 @@ import { Router } from '@angular/router';
 export class MainComponent {
   constructor(private readonly router: Router) {}
   btnClick = () => this.router.navigateByUrl('/notas');
+  btnClickCreate = () => this.router.navigateByUrl('/notas-form');
 }
