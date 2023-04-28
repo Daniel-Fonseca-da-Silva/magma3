@@ -42,18 +42,23 @@ export class NotaFiscalComponent implements OnInit {
     });
   }
 
+  onDelete(): void {
+    this.notaService.deleteNota(this.notas$.id!).subscribe();
+    this.displayStyle = 'none';
+  }
+
+  callFormUpdate(): void {
+    this.showPanelEdit = true;
+    this.notasFormList = this.initFormNotas();
+  }
+
   initFormNotas(): FormGroup {
     return this.fb.group({
-      name: [this.notas$.nome, [Validators.required, Validators.minLength(5)]],
+      nome: [this.notas$.nome, [Validators.required]],
       email: [this.notas$.email, [Validators.required]],
       preco: [this.notas$.preco, [Validators.required]],
       data: [this.notas$.data, [Validators.required]],
     });
-  }
-
-  onDelete(): void {
-    this.notaService.deleteNota(this.notas$.id!).subscribe();
-    this.displayStyle = 'none';
   }
 
   onSubmit(): NotaFiscal {
