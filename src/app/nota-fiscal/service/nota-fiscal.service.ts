@@ -10,7 +10,7 @@ export class NotaFiscalService {
   constructor(private readonly _httpClient: HttpClient) {}
 
   // API endpoint/
-  apiURL = 'http://localhost:3000/notas';
+  apiURL = 'http://localhost:7076/api/notas';
 
   loadNota(id: string): any {
     return this._httpClient.get(this.apiURL + '/' + id);
