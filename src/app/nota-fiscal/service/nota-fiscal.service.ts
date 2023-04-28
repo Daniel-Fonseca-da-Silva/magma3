@@ -12,8 +12,8 @@ export class NotaFiscalService {
   // API endpoint/
   apiURL = 'http://localhost:3000/notas';
 
-  loadNota(uuid: string) {
-    return this._httpClient.get(this.apiURL + '/' + uuid);
+  loadNota(id: string): any {
+    return this._httpClient.get(this.apiURL + '/' + id);
   }
 
   loadNotas() {
@@ -24,11 +24,11 @@ export class NotaFiscalService {
     return this._httpClient.post(this.apiURL, nota).subscribe();
   }
 
-  updateNota(uuid: string, nota: NotaFiscal): Observable<NotaFiscal> {
-    return this._httpClient.patch<NotaFiscal>(this.apiURL + uuid, nota);
+  updateNota(id: number, nota: NotaFiscal): Observable<NotaFiscal> {
+    return this._httpClient.patch<NotaFiscal>(this.apiURL + id, nota);
   }
 
-  deleteNota(uuid: string): Observable<any> {
-    return this._httpClient.delete(this.apiURL + uuid);
+  deleteNota(id: number): Observable<any> {
+    return this._httpClient.delete(this.apiURL + id);
   }
 }

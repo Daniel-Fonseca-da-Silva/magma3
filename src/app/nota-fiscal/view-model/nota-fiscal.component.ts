@@ -15,55 +15,88 @@ export class NotaFiscalComponent implements OnInit {
     private readonly fb: FormBuilder,
     private readonly router: Router
   ) {}
-  notasForm!: FormGroup;
+  NotasToUpdate$!: NotaFiscal;
   notas$!: NotaFiscal;
+  showPanelEdit: boolean = false;
+  displayStyle = 'none';
+  searchForm!: FormGroup;
+  notasFormList!: FormGroup;
 
   ngOnInit(): void {
-    this.notasForm = this.initForm();
+    this.searchForm = this.initForm();
   }
 
   changeRouter(rota: string) {
     this.router.navigateByUrl(rota);
   }
 
-  clearText() {
-    this.notasForm.reset();
+  clearText(): void {
+    this.searchForm.reset();
+    this.displayStyle = 'none';
+    this.showPanelEdit = false;
   }
 
   initForm(): FormGroup {
     return this.fb.group({
-      nome: ['', [Validators.required]],
-      email: ['', [Validators.required]],
-      preco: ['', [Validators.required]],
-      data: ['', [Validators.required]],
+      nome: ['', [Validators.required, Validators.minLength(5)]],
     });
   }
 
-  submitForm() {
-    this.notas$ = {
-      nome: this.notasForm.value.nome,
-      email: this.notasForm.value.email,
-      preco: this.notasForm.value.preco,
-      data: this.notasForm.value.data,
-    };
-
-    this.notaService.createNota(this.notas$);
-    // this.router.navigate(['/?']);
+  initFormNotas(): FormGroup {
+    return this.fb.group({
+      name: [this.notas$.nome, [Validators.required, Validators.minLength(5)]],
+      email: [this.notas$.email, [Validators.required]],
+      preco: [this.notas$.preco, [Validators.required]],
+      data: [this.notas$.data, [Validators.required]],
+    });
   }
 
-  carregarNota(uuid: string) {
-    this.notaService.loadNota(uuid).subscribe();
+  onDelete(): void {
+    this.notaService.deleteNota(this.notas$.id!).subscribe();
+    this.displayStyle = 'none';
+  }
+
+  onSubmit(): NotaFiscal {
+    this.notas$ = this.notaService
+      .loadNota(this.searchForm.value.nome)
+      .subscribe((dado: NotaFiscal) => (this.notas$ = dado));
+    this.showPanelEdit = false;
+    return this.notas$;
+  }
+
+  onSubmitUpdate(): void {
+    this.NotasToUpdate$ = {
+      nome: this.notasFormList.value.nome,
+      email: this.notasFormList.value.email,
+      preco: this.notasFormList.value.preco,
+      data: this.notasFormList.value.data,
+    };
+    this.notaService
+      .updateNota(this.notas$.id!, this.NotasToUpdate$)
+      .subscribe();
+    this.showPanelEdit = false;
+  }
+
+  clearTextUpdate(): void {
+    this.notasFormList.reset();
+  }
+
+  openPopup(): void {
+    this.displayStyle = 'block';
+  }
+  closePopup(): void {
+    this.displayStyle = 'none';
   }
 
   carregarNotas() {
     this.notaService.loadNotas().subscribe();
   }
 
-  atualizarNota(uuid: string, nota: NotaFiscal) {
+  atualizarNota(uuid: number, nota: NotaFiscal) {
     this.notaService.updateNota(uuid, nota).subscribe();
   }
 
-  DeletarNota(uuid: string, nota: NotaFiscal) {
+  DeletarNota(uuid: number, nota: NotaFiscal) {
     this.notaService.deleteNota(uuid).subscribe();
   }
 }
