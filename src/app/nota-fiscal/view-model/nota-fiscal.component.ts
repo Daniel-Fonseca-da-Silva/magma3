@@ -38,7 +38,7 @@ export class NotaFiscalComponent implements OnInit {
 
   initForm(): FormGroup {
     return this.fb.group({
-      nome: ['', [Validators.required, Validators.minLength(5)]],
+      nome: ['', [Validators.required, Validators.minLength(1)]],
     });
   }
 
@@ -98,6 +98,8 @@ export class NotaFiscalComponent implements OnInit {
   }
 
   atualizarNota(uuid: number, nota: NotaFiscal) {
+    console.log('id: ' + uuid);
+    
     this.notaService.updateNota(uuid, nota).subscribe();
   }
 

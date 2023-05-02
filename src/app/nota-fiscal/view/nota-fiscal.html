@@ -138,15 +138,6 @@
                   notasFormList.get('id')?.errors?.['maxlength']?.requiredLength }}
                   caracteres!
                 </div>
-                <div
-                  *ngIf="notasFormList.get('id')?.touched && notasFormList.get('id')?.errors?.['minlength']"
-                  class="alert alert-danger" role="alert">
-                  Atenção tamanho deve ter no mínimo {{
-                  notasFormList.get('id')?.errors?.['minlength']?.requiredLength }}
-                  caracteres!
-                </div>
-                <label for="" class="form-label">identificação</label>
-                <input type="text" class="form-control" formControlName="id" id="id" placeholder="">
               </div>
               <div class="mb-3">
                 <div *ngIf="notasFormList.get('email')?.touched && notasFormList.get('email')?.errors?.['required']"
